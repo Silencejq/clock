@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clock_item_time"
+        android:textSize="40dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <Switch
+        android:id="@+id/clock_item_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintTop_toTopOf="@id/clock_item_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/clock_item_time"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"/>
+
+    <Button
+        android:id="@+id/clock_item_show"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_down_circle_fill"
+        app:layout_constraintEnd_toEndOf="@id/clock_item_switch"
+        app:layout_constraintTop_toBottomOf="@+id/clock_item_time" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="一"
+        android:textOn="一"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clock_item_time"/>
+
+    <ToggleButton
+        android:id="@+id/clock_item_2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="二"
+        android:textOn="二"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_3"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_1"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="三"
+        android:textOn="三"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_4"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_2"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="四"
+        android:textOn="四"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_5"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_3"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="五"
+        android:textOn="五"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_6"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_4"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_6"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="六"
+        android:textOn="六"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_7"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_5"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_7"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="七"
+        android:textOn="七"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_6"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_1" />
+
+    <Button
+        android:id="@+id/clock_item_ring"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="设置铃声"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_vibrator"
+        app:layout_constraintLeft_toLeftOf="@id/clock_item_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clock_item_1" />
+
+    <ToggleButton
+        android:id="@+id/clock_item_vibrator"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/clock_toggle"
+        android:textOff="振动"
+        android:textOn="振动"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/clock_item_delete"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_ring"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_ring" />
+
+    <Button
+        android:id="@+id/clock_item_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="删除"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clock_item_vibrator"
+        app:layout_constraintTop_toTopOf="@+id/clock_item_ring" />
+
+    <Button
+        android:id="@+id/clock_item_hide"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_up_circle_fill"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/clock_item_switch"
+        app:layout_constraintTop_toBottomOf="@+id/clock_item_ring" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

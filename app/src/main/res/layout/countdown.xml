@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pink">
+
+    <TextView
+        android:id="@+id/countdown_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00:"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:id="@+id/countdown_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textColor="@color/black"
+        android:textSize="70dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/countdown_time"
+        app:layout_constraintStart_toEndOf="@id/countdown_time"
+        app:layout_constraintTop_toTopOf="@id/countdown_time"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <View
+        android:id="@+id/countdown_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/countdown_start"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/countdown_clear"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_reload"
+        android:tag="unclear"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/countdown_start"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/countdown_start"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_play_circle"
+        android:tag="start"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/countdown_setting"
+        app:layout_constraintStart_toEndOf="@id/countdown_clear" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/countdown_setting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_info_circle"
+        android:tag="setting"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/countdown_start" />
+
+
+    <TextView
+        android:id="@+id/countdown_before_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="00小时00分00秒"
+        android:textSize="40dp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/c_b_1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:text="1"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countdown_before_time" />
+
+    <Button
+        android:id="@+id/c_b_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="2"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_3"
+        app:layout_constraintStart_toEndOf="@+id/c_b_1"
+        app:layout_constraintTop_toTopOf="@+id/c_b_1" />
+
+    <Button
+        android:id="@+id/c_b_3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="3"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/c_b_2"
+        app:layout_constraintTop_toTopOf="@+id/c_b_1" />
+
+    <Button
+        android:id="@+id/c_b_4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:text="4"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_b_1" />
+
+    <Button
+        android:id="@+id/c_b_5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="5"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_6"
+        app:layout_constraintStart_toEndOf="@+id/c_b_4"
+        app:layout_constraintTop_toTopOf="@+id/c_b_4" />
+
+    <Button
+        android:id="@+id/c_b_6"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="6"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/c_b_5"
+        app:layout_constraintTop_toTopOf="@+id/c_b_4" />
+
+    <Button
+        android:id="@+id/c_b_7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:text="7"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_b_4" />
+
+    <Button
+        android:id="@+id/c_b_8"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="8"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_9"
+        app:layout_constraintStart_toEndOf="@+id/c_b_7"
+        app:layout_constraintTop_toTopOf="@+id/c_b_7" />
+
+    <Button
+        android:id="@+id/c_b_9"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="9"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/c_b_8"
+        app:layout_constraintTop_toTopOf="@+id/c_b_7" />
+
+    <Button
+        android:id="@+id/c_b_back"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_reload"
+        android:tag="back"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_b_7" />
+
+    <Button
+        android:id="@+id/c_b_0"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="0"
+        android:tag="1"
+        android:textColor="@color/colorAccent"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toStartOf="@+id/c_b_commit"
+        app:layout_constraintStart_toEndOf="@+id/c_b_back"
+        app:layout_constraintTop_toTopOf="@+id/c_b_back" />
+
+    <Button
+        android:id="@+id/c_b_commit"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_check_circle"
+        android:tag="commit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/c_b_0"
+        app:layout_constraintTop_toTopOf="@id/c_b_back" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

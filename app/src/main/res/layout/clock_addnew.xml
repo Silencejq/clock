@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".clock_addnew">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/clock_addnew_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="添加闹钟" />
+
+    <TimePicker
+        android:id="@+id/clock_addnew_pick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:numbersBackgroundColor="@color/white"
+        android:numbersSelectorColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clock_addnew_toolbar" />
+
+    <Button
+        android:id="@+id/clock_addnew_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/pink"
+        android:text="取消"
+        android:textSize="50dp"
+        android:onClick="back"
+        app:layout_constraintBottom_toBottomOf="@+id/clock_addnew_commit"
+        app:layout_constraintEnd_toStartOf="@id/clock_addnew_commit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clock_addnew_commit" />
+
+    <Button
+        android:id="@+id/clock_addnew_commit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/pink"
+        android:text="确定"
+        android:textSize="50dp"
+        android:onClick="commit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/clock_addnew_back"
+        app:layout_constraintTop_toBottomOf="@+id/clock_addnew_pick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

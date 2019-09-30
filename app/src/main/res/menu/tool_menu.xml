@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/button_time"
+        android:icon="@mipmap/baseline_schedule_black_48"
+        android:iconTint="@color/white"
+
+        android:title="time"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/button_clock"
+        android:icon="@mipmap/baseline_alarm_black_48"
+        android:title="clock"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/button_countdown"
+        android:icon="@mipmap/baseline_directions_run_black_48"
+        android:title="countdown"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/button_count"
+        android:icon="@mipmap/baseline_timer_black_48"
+        android:title="count"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/button_setting"
+        android:title="setting"
+        app:showAsAction="never"/>
+</menu>
