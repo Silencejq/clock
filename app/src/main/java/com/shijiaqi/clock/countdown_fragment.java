@@ -48,7 +48,7 @@ public class countdown_fragment extends Fragment {
     private String time_set;
     private Long time_set0 = 0L;
     private Timer timer;
-    private TimerTask timerTask;
+    private mytask timerTask;
     private Message message;
     private Handler handler;
     private boolean is = false;
@@ -60,6 +60,17 @@ public class countdown_fragment extends Fragment {
     private SharedPreferences.Editor editor;
     private MediaPlayer mediaPlayer;
     private Uri musicuri;
+    private countdown_service.countdown_binder binder;
+    private ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (countdown_service.countdown_binder) service;
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,11 +78,7 @@ public class countdown_fragment extends Fragment {
         view1 = new ArrayList<>();
         view2 = new ArrayList<>();
 //绑定后端计时服务
-        Intent intent8 = new Intent(getActivity(), countdown_service.class);
-        intent8.putExtra("time", time_set0);
-        getActivity().startService(intent8);
-        Intent intent9 = new Intent(getActivity(), countdown_service.class);
-        getActivity().bindService(intent9, conn, BIND_AUTO_CREATE);
+
 //主页面的设置
         maintime = view.findViewById(R.id.countdown_time);
         more = view.findViewById(R.id.countdown_more);
@@ -95,7 +102,7 @@ public class countdown_fragment extends Fragment {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                transform_extra(time_set0,maintime,more);
+                transform_extra(time_set0, maintime, more);
                 if (time_set0 == 0 && isstart) {
                     Toast.makeText(getContext(), "时间到啦～", Toast.LENGTH_LONG).show();
                 }
@@ -146,38 +153,7 @@ public class countdown_fragment extends Fragment {
 //timer和播放器都要重新声明一个，因为之前的释放掉了
                     isstart = true;
                     timer = new Timer();
-                    timerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (isstart) {
-                                if (time_set0 == 0) {
-                                    String music = sharedPreferences.getString("music", "false");
-                                    if (music == "false") {
-                                        musicuri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-                                    } else {
-                                        musicuri = Uri.parse(music);
-                                    }
-                                    mediaPlayer = new MediaPlayer();
-                                    try {
-                                        mediaPlayer.setDataSource(getActivity(), musicuri);
-                                    } catch (Exception e) {
-                                    }
-                                    mediaPlayer.setOnPreparedListener((MediaPlayer n) -> mediaPlayer.start());
-                                    mediaPlayer.prepareAsync();
-                                    isstart = false;
-                                    timerTask.cancel();
-                                    timer.purge();
-                                    start.setTag("stopmusic");
-                                    start.setBackground(stoppic);
-                                    time_set0 = 0L;
-                                } else {
-                                    time_set0 -= 10L;
-                                    message = new Message();
-                                    handler.sendMessage(message);
-                                }
-                            }
-                        }
-                    };
+                    timerTask = new mytask();
                     timer.scheduleAtFixedRate(timerTask, 0, 10);
                     start.setTag("stop");
                     start.setBackground(stoppic);
@@ -236,7 +212,7 @@ public class countdown_fragment extends Fragment {
                     time_set0 = (Long.parseLong(time_set.substring(0, 2)) * 3600L
                             + Long.parseLong(time_set.substring(2, 4)) * 60L
                             + Long.parseLong(time_set.substring(4))) * 1000;
-                    transform_extra(time_set0,maintime,more);
+                    transform_extra(time_set0, maintime, more);
                     clear.setTag("nooooclear");
                     hide(view2);
                     show(view1);
@@ -271,10 +247,43 @@ public class countdown_fragment extends Fragment {
         }
     }
 
-    public static void transform_extra(Long n,TextView time1,TextView time2) {
+    public static void transform_extra(Long n, TextView time1, TextView time2) {
         String time = count_adapter.transform(n);
         time1.setText(time.substring(0, time.length() - 2));
         time2.setText(time.substring(time.length() - 2));
+    }
+
+    class mytask extends TimerTask {
+        @Override
+        public void run() {
+            if (isstart) {
+                if (time_set0 == 0) {
+                    String music = sharedPreferences.getString("music", "false");
+                    if (music == "false") {
+                        musicuri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+                    } else {
+                        musicuri = Uri.parse(music);
+                    }
+                    mediaPlayer = new MediaPlayer();
+                    try {
+                        mediaPlayer.setDataSource(getActivity(), musicuri);
+                    } catch (Exception e) {
+                    }
+                    mediaPlayer.setOnPreparedListener((MediaPlayer n) -> mediaPlayer.start());
+                    mediaPlayer.prepareAsync();
+                    isstart = false;
+                    timerTask.cancel();
+                    timer.purge();
+                    start.setTag("stopmusic");
+                    start.setBackground(stoppic);
+                    time_set0 = 0L;
+                } else {
+                    time_set0 -= 10L;
+                    message = new Message();
+                    handler.sendMessage(message);
+                }
+            }
+        }
     }
 
     @Override
@@ -294,36 +303,54 @@ public class countdown_fragment extends Fragment {
     public void onStop() {
         super.onStop();
         if (time_set0 != 0L) {
-            Intent intent = new Intent(getActivity(), countdown_service.class);
-            intent.putExtra("time", time_set0);
-            getActivity().startService(intent);
+            Intent intent8 = new Intent(getActivity(), countdown_service.class);
+            intent8.putExtra("time", time_set0);
+            intent8.putExtra("doit", isstart);
+            intent8.putExtra("update",true);
+            getActivity().startForegroundService(intent8);
+//            Intent intent = new Intent(getActivity(), countdown_service.class);
+//            intent.putExtra("time", time_set0);
+//            intent.putExtra("doit", isstart);
+//            getActivity().startService(intent);
+            if (isstart) {
+                timerTask.cancel();
+                timer.purge();
+            }
         }
     }
 
     @CallSuper
     public void onResume() {
         super.onResume();
+        Intent intent9 = new Intent(getActivity(), countdown_service.class);
+        getActivity().bindService(intent9, conn, BIND_AUTO_CREATE);
+        //TODO 疑惑：binder并没有马上可以用，而且binder有延迟！？被destroy的服务的binder还可以用。
         if (binder != null) {
             if (binder.gettime() != 0) {
                 time_set0 = binder.gettime();
-                binder.canceltimer();
+                transform_extra(time_set0, maintime, more);
                 hide(view2);
                 show(view1);
+                if (binder.getdoit()) {
+                    timerTask = new mytask();
+                    timer.scheduleAtFixedRate(timerTask, 0, 10);
+                    start.setTag("stop");
+                    start.setBackground(stoppic);
+                    clear.setTag("clear");
+                }
             }
+
         }
+        Intent intent10 = new Intent(getActivity(), countdown_service.class);
+        intent10.putExtra("drop", true);
+        getActivity().startService(intent10);
     }
 
-    countdown_service.countdown_binder binder;
-    private ServiceConnection conn = new ServiceConnection() {
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = (countdown_service.countdown_binder) service;
-        }
-    };
+    @Override
+    public void onDestroy() {
+        getActivity().unbindService(conn);
+        super.onDestroy();
+    }
 
 
 }

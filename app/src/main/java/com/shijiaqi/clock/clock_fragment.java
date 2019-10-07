@@ -88,7 +88,8 @@ public class clock_fragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("list", clock_fragment.update(context));
         intent.putExtras(bundle);
-        context.startService(intent);
+        context.startForegroundService(intent);
+//TODO 关于systemUI
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
