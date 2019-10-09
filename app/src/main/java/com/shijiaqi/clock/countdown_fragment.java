@@ -71,14 +71,13 @@ public class countdown_fragment extends Fragment {
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder = (countdown_service.countdown_binder) service;
             if (binder != null) {
-                if(binder.stop()){
+                if (binder.stop()) {
                     time_set0 = 0L;
                     hide(view1);
                     show(view2);
                 }
                 if (binder.gettime() != 0L) {
-                    Log.e("ash", ""+binder.gettime());
-                    time_set0=binder.gettime();
+                    time_set0 = binder.gettime();
                     transform_extra(time_set0, maintime, more);
                     hide(view2);
                     show(view1);
@@ -92,7 +91,6 @@ public class countdown_fragment extends Fragment {
                         clear.setTag("clear");
                     }
                 }
-
             }
             getActivity().unbindService(conn);
             binder = null;
@@ -343,7 +341,7 @@ public class countdown_fragment extends Fragment {
                 start.setTag("start");
                 start.setBackground(startpic);
             }
-        }else {
+        } else {
             Intent intent8 = new Intent(getActivity(), countdown_service.class);
             intent8.putExtra("time", 0L);
             intent8.putExtra("update", true);
