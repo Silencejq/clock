@@ -63,20 +63,12 @@ public class clock_addnew extends AppCompatActivity {
             editor.putString(("clock_ring" + n), "content://media/internal/audio/media/88");
             editor.putBoolean(("vibrator" + n), true);
             editor.commit();
-            Intent intent = new Intent(this,clock_service.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("list",clock_fragment.update(this));
-            intent.putExtras(bundle);
-            startService(intent);
+            clock_fragment.update_service(this);
             finish();
         } else {
             editor.putString(("time" + position), "" + hour + ":" + minute);
             editor.commit();
-            Intent intent = new Intent(this,clock_service.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("list",clock_fragment.update(this));
-            intent.putExtras(bundle);
-            startService(intent);
+            clock_fragment.update_service(this);
             finish();
         }
     }

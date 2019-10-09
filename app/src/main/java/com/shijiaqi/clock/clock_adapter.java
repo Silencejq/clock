@@ -189,11 +189,7 @@ public class clock_adapter extends BaseAdapter {
                         editor.putBoolean("switch" + position, false);
                     }
                     editor.commit();
-                    Intent intent = new Intent(context,clock_service.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("list", clock_fragment.update(context));
-                    intent.putExtras(bundle);
-                    context.startService(intent);
+                    clock_fragment.update_service(context);
                     break;
                 }
                 case R.id.clock_item_ring: {
@@ -249,11 +245,7 @@ public class clock_adapter extends BaseAdapter {
                         n++;
                     }
                     change(m);
-                    Intent intent = new Intent(context,clock_service.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList("list", clock_fragment.update(context));
-                    intent.putExtras(bundle);
-                    context.startService(intent);
+                    clock_fragment.update_service(context);
                     break;
                 }
                 case R.id.clock_item_1: {
