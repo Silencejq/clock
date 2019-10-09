@@ -64,11 +64,38 @@ public class countdown_fragment extends Fragment {
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
+//非正常杀死才回调
         }
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder = (countdown_service.countdown_binder) service;
+            if (binder != null) {
+                if(binder.stop()){
+                    time_set0 = 0L;
+                    hide(view1);
+                    show(view2);
+                }
+                if (binder.gettime() != 0L) {
+                    Log.e("ash", ""+binder.gettime());
+                    time_set0=binder.gettime();
+                    transform_extra(time_set0, maintime, more);
+                    hide(view2);
+                    show(view1);
+                    if (binder.getdoit()) {
+                        timerTask = new mytask();
+                        timer = new Timer();
+                        isstart = true;
+                        timer.scheduleAtFixedRate(timerTask, 0, 10);
+                        start.setTag("stop");
+                        start.setBackground(stoppic);
+                        clear.setTag("clear");
+                    }
+                }
+
+            }
+            getActivity().unbindService(conn);
+            binder = null;
         }
     };
 
@@ -304,18 +331,23 @@ public class countdown_fragment extends Fragment {
         super.onStop();
         if (time_set0 != 0L) {
             Intent intent8 = new Intent(getActivity(), countdown_service.class);
+            String music = sharedPreferences.getString("music", "false");
+            intent8.putExtra("music", music);
             intent8.putExtra("time", time_set0);
             intent8.putExtra("doit", isstart);
-            intent8.putExtra("update",true);
+            intent8.putExtra("update", true);
             getActivity().startForegroundService(intent8);
-//            Intent intent = new Intent(getActivity(), countdown_service.class);
-//            intent.putExtra("time", time_set0);
-//            intent.putExtra("doit", isstart);
-//            getActivity().startService(intent);
             if (isstart) {
                 timerTask.cancel();
                 timer.purge();
+                start.setTag("start");
+                start.setBackground(startpic);
             }
+        }else {
+            Intent intent8 = new Intent(getActivity(), countdown_service.class);
+            intent8.putExtra("time", 0L);
+            intent8.putExtra("update", true);
+            getActivity().startForegroundService(intent8);
         }
     }
 
@@ -324,31 +356,10 @@ public class countdown_fragment extends Fragment {
         super.onResume();
         Intent intent9 = new Intent(getActivity(), countdown_service.class);
         getActivity().bindService(intent9, conn, BIND_AUTO_CREATE);
-        //TODO 疑惑：binder并没有马上可以用，而且binder有延迟！？被destroy的服务的binder还可以用。
-        if (binder != null) {
-            if (binder.gettime() != 0) {
-                time_set0 = binder.gettime();
-                transform_extra(time_set0, maintime, more);
-                hide(view2);
-                show(view1);
-                if (binder.getdoit()) {
-                    timerTask = new mytask();
-                    timer.scheduleAtFixedRate(timerTask, 0, 10);
-                    start.setTag("stop");
-                    start.setBackground(stoppic);
-                    clear.setTag("clear");
-                }
-            }
-
-        }
-        Intent intent10 = new Intent(getActivity(), countdown_service.class);
-        intent10.putExtra("drop", true);
-        getActivity().startService(intent10);
     }
 
     @Override
     public void onDestroy() {
-        getActivity().unbindService(conn);
         super.onDestroy();
     }
 

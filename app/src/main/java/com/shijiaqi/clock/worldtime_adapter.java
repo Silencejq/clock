@@ -58,7 +58,7 @@ public class worldtime_adapter extends BaseAdapter implements CompoundButton.OnC
             view_holder.checkBox.setTag(position);
         }
         view_holder.checkBox.setOnCheckedChangeListener(this);
-//        view_holder.checkBox.setChecked((boolean) (countries.get(position).get("ischecked")));
+        view_holder.checkBox.setChecked((boolean) (countries.get(position).get("ischecked")));
         view_holder.textView.setText((String) countries.get(position).get("name"));
         return convertView;
     }

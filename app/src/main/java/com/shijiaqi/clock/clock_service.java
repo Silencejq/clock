@@ -32,16 +32,6 @@ public class clock_service extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//        NotificationChannel channel = new NotificationChannel("ash", "ash", NotificationManager.IMPORTANCE_HIGH);
-//        manager.createNotificationChannel(channel);
-//        Notification notification = new Notification.Builder(this, "ash")
-//                .setContentTitle("闹钟功能")
-//                .setContentText("闹钟设置完毕~")
-//                .setSmallIcon(R.mipmap.baseline_alarm_black_48)
-//                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.baseline_alarm_black_48))
-//                .build();
-//        startForeground(2, notification);
     }
 
     @Override
