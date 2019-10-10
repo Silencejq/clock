@@ -345,7 +345,7 @@ public class countdown_fragment extends Fragment {
             Intent intent8 = new Intent(getActivity(), countdown_service.class);
             intent8.putExtra("time", 0L);
             intent8.putExtra("update", true);
-            getActivity().startForegroundService(intent8);
+            getActivity().startService(intent8);
         }
     }
 
